@@ -1,5 +1,5 @@
 .container {
-  width: 380px;
+  width: 440px;
   margin: 0 auto;
   background-image: linear-gradient(
     -225deg,
@@ -17,7 +17,7 @@
   font-size: 20px;
   margin-bottom: 1.25rem;
 }
-input[type='checkbox'] {
+input[type="checkbox"] {
   height: 18px;
   width: 18px;
 }
@@ -40,9 +40,18 @@ input[type='checkbox'] {
   );
 }
 .result {
+  text-align: center;
   width: 100%;
+  height: 50px;
+  color: white;
+  background-color: rgb(64, 113, 197);
+  font-size: 25px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.result input {
+/* .result input {
   outline: none;
   border: none;
   width: 100%;
@@ -52,4 +61,19 @@ input[type='checkbox'] {
   background-color: rgb(64, 113, 197);
   font-size: 25px;
   font-weight: 600;
+} */
+.icon {
+  padding: 10px;
+}
+.icon:hover {
+  opacity: 0.5;
+}
+.icon-disable {
+  opacity: 0.2;
+  padding: 10px;
+}
+.password-result {
+  flex-grow: 1;
+  padding: 10px 0px 10px 0px;
+  /* text-align: center; */
 }
