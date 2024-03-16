@@ -4,6 +4,7 @@ import { arrayCharacterASCII } from "./utilis/arrayCharacterASCII";
 import { passwordConditionList } from "./utilis/constants";
 import { LuClipboard } from "react-icons/lu";
 import { LuClipboardCheck } from "react-icons/lu";
+import NotificationBox from "./components/notificationBox/NotificationBox";
 type CheckedList = {
   number: boolean;
   upper: boolean;
@@ -128,6 +129,7 @@ function App() {
           </button>
         </form>
       </div>
+      <NotificationBox />
     </>
   );
 }

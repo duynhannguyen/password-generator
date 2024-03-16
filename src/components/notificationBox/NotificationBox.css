@@ -1,0 +1,18 @@
+.noti-container {
+  background: white;
+  color: black;
+  width: 400px;
+  box-shadow: 1px 1px 10px 1px rgb(113, 111, 111);
+  border-radius: 4px;
+  text-align: center;
+}
+.noti-content {
+  padding: 16px;
+  position: relative;
+}
+.noti-content::after {
+  content: "\00D7";
+  position: absolute;
+  top: 2px;
+  right: 5px;
+}
