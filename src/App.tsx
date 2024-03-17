@@ -129,7 +129,7 @@ function App() {
           </button>
         </form>
       </div>
-      <NotificationBox />
+      <NotificationBox password={result} />
     </>
   );
 }
