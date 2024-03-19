@@ -8,13 +8,21 @@ type NotificationBoxProps = {
 const NotificationBox = ({ password }: NotificationBoxProps) => {
   const [width, setWidth] = useState(5000);
   const [isPause, setIsPause] = useState(true);
+  const [isShow, setIsShow] = useState(false);
+  console.log(width);
   useEffect(() => {
     let progress: number;
     if (password) {
+      setIsShow(true);
       if (!isPause) {
         return;
       }
+
       progress = setInterval(() => {
+        if (width === 0) {
+          setIsShow(false);
+          return clearInterval(progress);
+        }
         setWidth((prev) => prev - 10);
       }, 10);
     }
@@ -25,18 +33,23 @@ const NotificationBox = ({ password }: NotificationBoxProps) => {
   }, [width, isPause, password]);
 
   return (
-    <div
-      onMouseEnter={() => setIsPause(false)}
-      onMouseLeave={() => setIsPause(true)}
-      className="noti-container"
-    >
-      <div className="noti-content">
-        Password created successfully: {password}
+    isShow && (
+      <div
+        onMouseEnter={() => setIsPause(false)}
+        onMouseLeave={() => setIsPause(true)}
+        className="noti-container"
+      >
+        <div className="noti-content">
+          Password created successfully: {password}
+        </div>
+        {password && (
+          <div
+            style={{ width: `${width / 50}%` }}
+            className="progress-bar"
+          ></div>
+        )}
       </div>
-      {password && (
-        <div style={{ width: `${width / 50}%` }} className="progress-bar"></div>
-      )}
-    </div>
+    )
   );
 };
 

@@ -129,7 +129,7 @@ function App() {
           </button>
         </form>
       </div>
-      <NotificationBox password={result} />
+      {result && <NotificationBox password={result} />}
     </>
   );
 }
