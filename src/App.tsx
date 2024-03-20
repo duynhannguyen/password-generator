@@ -11,10 +11,16 @@ type CheckedList = {
   symbol: boolean;
   [key: string]: boolean;
 };
+type NotiList = {
+  result: string;
+  content: string;
+  lastChild?: string;
+};
 function App() {
   const [passwordLength, setPasswordLength] = useState(4);
   const [result, setResult] = useState("");
   const [isCoppy, setIsCoppy] = useState(false);
+  const [notiList, setNotiList] = useState<NotiList[]>([]);
   const [checkedList, setCheckedList] = useState<CheckedList>({
     number: false,
     upper: false,
@@ -41,7 +47,6 @@ function App() {
         charCodes[Math.floor(Math.random() * charCodes.length)];
       passwordCharacter.push(String.fromCharCode(characterCode));
     }
-    console.log(passwordCharacter.join(""));
     return passwordCharacter.join("");
   };
   const onCheck = () => (event: ChangeEvent<HTMLInputElement>) => {
@@ -55,21 +60,43 @@ function App() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setResult(generatePassword(passwordLength));
+    const password = generatePassword(passwordLength);
+    setResult(password);
+    setNotiList([
+      ...notiList,
+      {
+        result: password,
+        content: "Password created successfully",
+      },
+    ]);
   };
   const coppyGeneratedPassword = () => {
     if (!result) {
       return;
     }
     setIsCoppy(true);
+    setNotiList([
+      ...notiList,
+      { content: "Password coppied", lastChild: result, result: result },
+    ]);
     navigator.clipboard.writeText(result);
   };
   return (
     <>
       <div className="container">
+        <div className="noti-section">
+          {notiList.length > 0 &&
+            notiList.map((noti) => (
+              <NotificationBox
+                key={noti.result}
+                password={noti.result}
+                lastChild={result}
+                content={noti.content}
+              />
+            ))}
+        </div>
         <h1> Password Generator </h1>
         <h3 className="result">
-          {/* <input type="text" readOnly value={result} /> */}
           <div className="password-result">{result}</div>
           <div
             className={`${!result && "icon-disable"} ${result && "icon"} `}
@@ -129,7 +156,6 @@ function App() {
           </button>
         </form>
       </div>
-      {result && <NotificationBox password={result} />}
     </>
   );
 }

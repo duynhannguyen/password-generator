@@ -2,12 +2,15 @@
   background: white;
   color: black;
   width: 400px;
-  box-shadow: 1px 1px 10px 1px rgb(113, 111, 111);
+  height: 100px;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 2px 15px 0 rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   text-align: center;
   position: relative;
+  animation: slideFromRight 0.5s forwards;
 }
 .noti-content {
+  text-align: left;
   padding: 16px;
   position: relative;
 }
@@ -27,4 +30,31 @@
   height: 5px;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
+}
+
+@keyframes slideFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-500%);
+  }
+}
+.slideout {
+  animation: slideOut 0.5s forwards;
+}
+.last-noti {
+  opacity: 1;
+}
+.not-last-noti {
+  opacity: 0.3;
 }

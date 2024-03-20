@@ -8,6 +8,7 @@
   );
   padding: 2rem;
   border-radius: 1.25rem;
+  position: relative;
 }
 
 .form-item {
@@ -51,17 +52,7 @@ input[type="checkbox"] {
   align-items: center;
   justify-content: space-between;
 }
-/* .result input {
-  outline: none;
-  border: none;
-  width: 100%;
-  height: 50px;
-  text-align: center;
-  color: white;
-  background-color: rgb(64, 113, 197);
-  font-size: 25px;
-  font-weight: 600;
-} */
+
 .icon {
   padding: 10px;
 }
@@ -75,5 +66,13 @@ input[type="checkbox"] {
 .password-result {
   flex-grow: 1;
   padding: 10px 0px 10px 0px;
-  /* text-align: center; */
+}
+.noti-section {
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  top: -25%;
+  right: 7%;
+  padding: 10px;
+  justify-content: right;
 }

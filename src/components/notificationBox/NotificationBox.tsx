@@ -3,13 +3,19 @@ import "./NotificationBox.css";
 
 type NotificationBoxProps = {
   password: string;
+  content: string;
+  lastChild?: string;
 };
 
-const NotificationBox = ({ password }: NotificationBoxProps) => {
+const NotificationBox = ({
+  password,
+  lastChild,
+  content,
+}: NotificationBoxProps) => {
   const [width, setWidth] = useState(5000);
   const [isPause, setIsPause] = useState(true);
   const [isShow, setIsShow] = useState(false);
-  console.log(width);
+
   useEffect(() => {
     let progress: number;
     if (password) {
@@ -17,10 +23,8 @@ const NotificationBox = ({ password }: NotificationBoxProps) => {
       if (!isPause) {
         return;
       }
-
       progress = setInterval(() => {
         if (width === 0) {
-          setIsShow(false);
           return clearInterval(progress);
         }
         setWidth((prev) => prev - 10);
@@ -37,10 +41,12 @@ const NotificationBox = ({ password }: NotificationBoxProps) => {
       <div
         onMouseEnter={() => setIsPause(false)}
         onMouseLeave={() => setIsPause(true)}
-        className="noti-container"
+        className={`noti-container ${
+          password === lastChild ? "last-noti" : "not-last-noti"
+        } ${width <= 100 && "slideout"} `}
       >
         <div className="noti-content">
-          Password created successfully: {password}
+          {content}:<div>{password}</div>
         </div>
         {password && (
           <div
