@@ -46,12 +46,16 @@ const NotificationBox = ({
         } ${width <= 100 && "slideout"} `}
       >
         <div className="noti-content">
-          {content}:<div>{password}</div>
+          {content === "Success" ? "Password created successfully" : ""}
+          {content === "Spam" ? "Password already coppied" : ""}
+          {content === "Coppy" ? "Password coppied" : ""}:<div>{password}</div>
         </div>
         {password && (
           <div
             style={{ width: `${width / 50}%` }}
-            className="progress-bar"
+            className={`${content === "Success" && "progress-bar"} ${
+              content === "Coppy" && "progress-bar-coppy"
+            } ${content === "Spam" && "progress-bar-spam"} `}
           ></div>
         )}
       </div>

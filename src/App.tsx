@@ -11,16 +11,17 @@ type CheckedList = {
   symbol: boolean;
   [key: string]: boolean;
 };
-type NotiList = {
+type NotiArray = {
   result: string;
   content: string;
   lastChild?: string;
 };
+
 function App() {
   const [passwordLength, setPasswordLength] = useState(4);
   const [result, setResult] = useState("");
   const [isCoppy, setIsCoppy] = useState(false);
-  const [notiList, setNotiList] = useState<NotiList[]>([]);
+  const [notiList, setNotiList] = useState<NotiArray[]>([]);
   const [checkedList, setCheckedList] = useState<CheckedList>({
     number: false,
     upper: false,
@@ -62,11 +63,12 @@ function App() {
 
     const password = generatePassword(passwordLength);
     setResult(password);
+    setIsCoppy(false);
     setNotiList([
       ...notiList,
       {
         result: password,
-        content: "Password created successfully",
+        content: "Success",
       },
     ]);
   };
@@ -74,10 +76,17 @@ function App() {
     if (!result) {
       return;
     }
+
+    if (isCoppy && notiList[notiList.length - 1].result === result) {
+      return setNotiList([
+        ...notiList,
+        { content: "Spam", lastChild: result, result: result },
+      ]);
+    }
     setIsCoppy(true);
     setNotiList([
       ...notiList,
-      { content: "Password coppied", lastChild: result, result: result },
+      { content: "Coppy", lastChild: result, result: result },
     ]);
     navigator.clipboard.writeText(result);
   };
